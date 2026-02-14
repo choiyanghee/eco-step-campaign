@@ -3,41 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Step: 번영을 위한 캠페인</title>
+    <title>전자과 번영 캠페인: Tech-Share</title>
     <style>
-        body { font-family: 'Apple SD Gothic Neo', sans-serif; text-align: center; background-color: #f4f9f4; color: #333; }
-        .container { max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-        h1 { color: #2e7d32; }
-        #gauge-container { width: 100%; background: #e0e0e0; border-radius: 10px; margin: 20px 0; }
-        #gauge { width: 10%; height: 25px; background: #4caf50; border-radius: 10px; transition: width 0.5s; }
-        button { padding: 12px 24px; font-size: 16px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background: #1b5e20; }
-        .log { margin-top: 20px; font-size: 0.9em; color: #666; }
+        :root { --primary: #2c3e50; --accent: #e74c3c; --green: #27ae60; }
+        body { font-family: 'Pretendard', sans-serif; background-color: #f0f2f5; margin: 0; padding: 20px; }
+        .container { max-width: 600px; margin: auto; background: white; padding: 30px; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+        h1 { color: var(--primary); font-size: 24px; }
+        .description { color: #666; margin-bottom: 25px; line-height: 1.6; }
+        
+        /* 실천 항목 리스트 스타일 */
+        .action-list { text-align: left; margin-bottom: 20px; }
+        .action-item { background: #f8f9fa; padding: 15px; border-radius: 10px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 5px solid var(--green); }
+        .action-item span { font-weight: bold; color: #333; }
+        
+        button { background: var(--green); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; transition: 0.3s; }
+        button:hover { background: #219150; transform: scale(1.05); }
+
+        /* 결과 창 */
+        #total-impact { background: var(--primary); color: white; padding: 20px; border-radius: 15px; margin-top: 20px; }
+        .count { font-size: 2em; font-weight: bold; color: #f1c40f; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🌱 Eco-Step</h1>
-        <p>나의 작은 선택이 만드는 <b>경제적 번영</b></p>
-        <div id="gauge-container">
-            <div id="gauge"></div>
+        <h1>⚡ 전자과 '기술 번영' 캠페인</h1>
+        <p class="description">우리 전자과의 기술은 세상을 더 풍요롭게 만듭니다.<br>오늘 실천한 <b>기술적 가치</b>를 기록해주세요!</p>
+
+        <div class="action-list">
+            <div class="action-item">
+                <span>🛠️ 지역사회 가전제품 수리 봉사</span>
+                <button onclick="updateImpact(50000, '수리 봉사')">인증</button>
+            </div>
+            <div class="action-item">
+                <span>💡 에너지 절감 회로 설계/적용</span>
+                <button onclick="updateImpact(30000, '회로 설계')">인증</button>
+            </div>
+            <div class="action-item">
+                <span>♻️ 폐가전 부품 추출 및 재활용</span>
+                <button onclick="updateImpact(10000, '부품 재활용')">인증</button>
+            </div>
+            <div class="action-item">
+                <span>👨‍🏫 후배/동료 기술 멘토링</span>
+                <button onclick="updateImpact(20000, '기술 공유')">인증</button>
+            </div>
         </div>
-        <p>현재 사회적 가치 지수: <span id="score">10</span>%</p>
-        <button onclick="addStep()">오늘의 실천 인증하기</button>
-        <div class="log" id="log-msg"></div>
+
+        <div id="total-impact">
+            <p>우리가 창출한 누적 경제적 가치</p>
+            <div class="count">₩ <span id="money">0</span></div>
+            <p id="status-msg">첫 번째 기술 나눔을 기다리고 있어요!</p>
+        </div>
     </div>
 
     <script>
-        let score = 10;
-        function addStep() {
-            if(score < 100) {
-                score += 5;
-                document.getElementById('gauge').style.width = score + '%';
-                document.getElementById('score').innerText = score;
-                document.getElementById('log-msg').innerText = "방금 한 분의 실천으로 세상이 더 풍요로워졌습니다!";
-            } else {
-                document.getElementById('log-msg').innerText = "목표 달성! 우리가 함께 번영을 일궈냈습니다.";
-            }
+        let totalMoney = 0;
+        function updateImpact(value, action) {
+            totalMoney += value;
+            document.getElementById('money').innerText = totalMoney.toLocaleString();
+            document.getElementById('status-msg').innerText = `✨ 방금 '${action}'으로 사회적 자산을 키웠습니다!`;
+            
+            // 간단한 애니메이션 효과
+            const countDisplay = document.querySelector('.count');
+            countDisplay.style.transform = "scale(1.1)";
+            setTimeout(() => { countDisplay.style.transform = "scale(1)"; }, 200);
         }
     </script>
 </body>
