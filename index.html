@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Step: 번영을 위한 캠페인</title>
+    <style>
+        body { font-family: 'Apple SD Gothic Neo', sans-serif; text-align: center; background-color: #f4f9f4; color: #333; }
+        .container { max-width: 500px; margin: 50px auto; padding: 20px; background: white; border-radius: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2e7d32; }
+        #gauge-container { width: 100%; background: #e0e0e0; border-radius: 10px; margin: 20px 0; }
+        #gauge { width: 10%; height: 25px; background: #4caf50; border-radius: 10px; transition: width 0.5s; }
+        button { padding: 12px 24px; font-size: 16px; background: #2e7d32; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background: #1b5e20; }
+        .log { margin-top: 20px; font-size: 0.9em; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Eco-Step</h1>
+        <p>나의 작은 선택이 만드는 <b>경제적 번영</b></p>
+        <div id="gauge-container">
+            <div id="gauge"></div>
+        </div>
+        <p>현재 사회적 가치 지수: <span id="score">10</span>%</p>
+        <button onclick="addStep()">오늘의 실천 인증하기</button>
+        <div class="log" id="log-msg"></div>
+    </div>
+
+    <script>
+        let score = 10;
+        function addStep() {
+            if(score < 100) {
+                score += 5;
+                document.getElementById('gauge').style.width = score + '%';
+                document.getElementById('score').innerText = score;
+                document.getElementById('log-msg').innerText = "방금 한 분의 실천으로 세상이 더 풍요로워졌습니다!";
+            } else {
+                document.getElementById('log-msg').innerText = "목표 달성! 우리가 함께 번영을 일궈냈습니다.";
+            }
+        }
+    </script>
+</body>
+</html>
